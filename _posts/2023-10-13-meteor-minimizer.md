@@ -62,3 +62,5 @@ private void OnBarrierEntered(AsteroidBarrier asteroidBarrier)
 ```
 
 The solution I used to prevent this was just to free the queue of any meteor that would fall outside the bounds of the screen - meteors still bounce this way, but if they're spawned outside, then they are harmlessly removed.
+
+In conclusion, I think that I learned a fair bit about Godot the variety of approaches' positives and negatives to game development. It was my first game project after fleshing out my C# skills a lot more thoroughly and though it was a bit rough around the edges in the end, its still something that I very much enjoyed and took a lot away from!
