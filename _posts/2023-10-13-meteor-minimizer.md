@@ -9,24 +9,22 @@ I found that the pattern was about as strong as I expected - and that was very s
 
 ```cs
 if (Hp <= 0)
-	{
-		if (Position.Y > 0)
-		{
-			_autoLoad.EmitAsteroidDestroyed(this);
-			_autoLoad.Score += ScoreValue;
-		}
-
-        Console.WriteLine(_autoLoad.Score);
-
-        if (Divisions <= 1)
-		{
-			Split();
-		}
-		else
-		{
-			QueueFree();
-		}
-	}
+{
+    if (Position.Y > 0)
+    {
+        _autoLoad.EmitAsteroidDestroyed(this);
+        _autoLoad.Score += ScoreValue;
+    }
+    Console.WriteLine(_autoLoad.Score);
+    if (Divisions <= 1)
+    {
+        Split();
+    }
+    else
+    {
+        QueueFree();
+    }
+}
 ```
 
 Opting to use C# over Godot's GDScript had its ups and downs. For one, I was much more familiar with its paradigms, so it was easier to hit the ground running. However, Godot 4's lack of HTML5 export support meant that I was ultimately unable to create an in-web playable export of my program.
@@ -41,26 +39,24 @@ Another point of improvement I would look to is how I handled the game's walls -
 
 ```cs
 private void OnBarrierEntered(AsteroidBarrier asteroidBarrier)
-	{
-		switch (asteroidBarrier.Direct)
-		{
-			case AsteroidBarrier.BounceDirection.LeftAndRight:
-				Velocity.X *= -1;
-				break;
-
-			case AsteroidBarrier.BounceDirection.UpAndDown:
-				Velocity.Y *= -1;
-				break;
-
-			default:
-				throw new ArgumentOutOfRangeException();
-		}
-
-		Console.WriteLine("Asteroid bounced");
-	}
-
+{
+    switch (asteroidBarrier.Direct)
+    {
+        case AsteroidBarrier.BounceDirection.LeftAndRight:
+            Velocity.X *= -1;
+            break;
+        case AsteroidBarrier.BounceDirection.UpAndDown:
+            Velocity.Y *= -1;
+            break;
+        default:
+            throw new ArgumentOutOfRangeException();
+    }
+    Console.WriteLine("Asteroid bounced");
+}
 ```
 
 The solution I used to prevent this was just to free the queue of any meteor that would fall outside the bounds of the screen - meteors still bounce this way, but if they're spawned outside, then they are harmlessly removed.
 
-In conclusion, I think that I learned a fair bit about Godot the variety of approaches' positives and negatives to game development. It was my first game project after fleshing out my C# skills a lot more thoroughly and though it was a bit rough around the edges in the end, its still something that I very much enjoyed and took a lot away from!
+Outside of that, there were a couple of areas that could have been fleshed out more with time. It did not include the functional score saving feature that I had planned for. I also felt that music was on the lower end of my priorities for this project, ultimately meaning that while SFX were implemented, music was not.
+
+In conclusion, I think that I learned a fair bit about Godot the variety of approaches' positives and negatives to game development. It was a bit rough around the edges in the end, but its still something that I very much enjoyed and took a lot away from! I'm looking forward to adding more game jam games to my list of projects going forward.
