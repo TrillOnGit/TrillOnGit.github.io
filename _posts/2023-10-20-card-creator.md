@@ -11,10 +11,10 @@ I primarily oversaw backend work (data handling, processing user input, CRUD fun
 public async Task CreateCard(Card card)
 {
     await _conn.ExecuteAsync(
-        "INSERT INTO CardData (CardName, userID, CardImg, CARDTEXT, CardFlavorText, CardIllustrator, cardRARITY, cardTYPE, " +
-        "cardSUBTYPE, cardPOWER, cardTOUGHNESS, ISLEGENDARY, W, U, B, R, G, C) VALUES (@name, @userId, @cardImg, @text, @flavor, " +
-        "@illustrator, @rarity, @type, @subType, @power, @toughness, @isLegendary, @white, @blue, @black, " +
-        "@red, @green, @colorless);",
+        "INSERT INTO CardData (CardName, userID, CardImg, CARDTEXT, CardFlavorText, CardIllustrator, cardRARITY, " +
+        "cardTYPE, cardSUBTYPE, cardPOWER, cardTOUGHNESS, ISLEGENDARY, W, U, B, R, G, C) VALUES (@name, @userId, " +
+        "@cardImg, @text, @flavor, @illustrator, @rarity, @type, @subType, @power, @toughness, @isLegendary, " +
+        "@white, @blue, @black, @red, @green, @colorless);",
         new
         {
             name = card.Name, text = card.CardText, userId = card.UserId, cardImg = card.CardImg,
