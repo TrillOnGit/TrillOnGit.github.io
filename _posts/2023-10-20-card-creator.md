@@ -131,7 +131,24 @@ public static AdjustingColor GetInnerColor(ManaCost inputCost)
 }
 ```
 
-To verify that these processes worked while in development, we employed unit testing methodology.
+To verify that these processes worked while in development, I employed unit testing methodology and the xUnit.net framework. I utilized inline data and member data for varying cases. Because each of the tests were performed on methods, I used theory instead of fact tests. I createed tests mostly for the card class, testing the ability to determine the total cost of a card from a string, the ability to create a string from enum values, the ability to determine inner and frame colours, and the ability to determine the amount of colourless resources. All functionality that the Card and ManaCost classes handle.
+
+```cs
+public static TheoryData<ManaCost, string> ManaCostToStringTestData => new() {
+    { new ManaCost { Colorless = 1}, "1" },
+    { new ManaCost { Colorless = 1, White = 2 }, "1WW" },
+    { new ManaCost { White = 1, Blue = 2, Red = 1}, "WUUR"},
+    { new ManaCost { }, "0"}
+};
+[Theory]
+[MemberData(nameof(ManaCostToStringTestData))]
+public void ManaCostToStringTest(ManaCost costInput, string expected)
+{
+    var actual = costInput.ToString();
+
+    Assert.Equal(expected, actual);
+}
+```
 
 While working on this project I employed asynchronous processing to allow multiple processes to be handled at once. In all reality this project likely did not significantly benefit from the use of asynchronisity. The processes here are generally likely to be simple unless we have a large dataset to display from our CRUD functionality.
 
